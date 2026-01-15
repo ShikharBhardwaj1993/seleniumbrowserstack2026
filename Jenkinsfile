@@ -6,11 +6,13 @@ pipeline {
         jdk 'Java17'
     }
 
-     environment {
-        BROWSERSTACK_USERNAME = credentials('Shikhar Bhardwaj')
-        BROWSERSTACK_ACCESS_KEY = credentials('LqcxPXqfuCcznNuoXwZX')
+    environment {
+        BROWSERSTACK_USERNAME = credentials('BROWSERSTACK_USERNAME')
+        BROWSERSTACK_ACCESS_KEY = credentials('BROWSERSTACK_ACCESS_KEY')
     }
+
     stages {
+
         stage('Checkout') {
             steps {
                 git branch: 'main',
@@ -18,9 +20,9 @@ pipeline {
             }
         }
 
-        stage('Build & Test') {
+        stage('Run Tests on BrowserStack') {
             steps {
-                bat 'mvn clean test'
+                bat 'mvn clean test -DrunOn=browserstack'
             }
         }
     }
