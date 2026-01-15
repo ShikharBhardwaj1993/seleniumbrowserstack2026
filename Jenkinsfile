@@ -6,6 +6,10 @@ pipeline {
         jdk 'Java17'
     }
 
+     environment {
+        BROWSERSTACK_USERNAME = credentials('BROWSERSTACK_USERNAME')
+        BROWSERSTACK_ACCESS_KEY = credentials('BROWSERSTACK_ACCESS_KEY')
+    }
     stages {
         stage('Checkout') {
             steps {
