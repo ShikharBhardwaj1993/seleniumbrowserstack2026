@@ -7,8 +7,8 @@ pipeline {
     }
 
      environment {
-        BROWSERSTACK_USERNAME = credentials('BROWSERSTACK_USERNAME')
-        BROWSERSTACK_ACCESS_KEY = credentials('BROWSERSTACK_ACCESS_KEY')
+        BROWSERSTACK_USERNAME = credentials('Shikhar Bhardwaj')
+        BROWSERSTACK_ACCESS_KEY = credentials('LqcxPXqfuCcznNuoXwZX')
     }
     stages {
         stage('Checkout') {
