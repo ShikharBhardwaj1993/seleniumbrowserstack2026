@@ -26,4 +26,15 @@ pipeline {
             }
         }
     }
+        post {
+        always {
+            echo 'Test execution completed'
+        }
+        success {
+            echo 'BrowserStack tests passed'
+        }
+        failure {
+            echo 'BrowserStack tests failed'
+        }
+    }
 }
