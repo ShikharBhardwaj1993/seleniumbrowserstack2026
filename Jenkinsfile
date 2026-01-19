@@ -6,11 +6,6 @@ pipeline {
         jdk 'Java17'
     }
 
-    environment {
-        BROWSERSTACK_USERNAME = credentials('BROWSERSTACK_USERNAME')
-        BROWSERSTACK_ACCESS_KEY = credentials('BROWSERSTACK_ACCESS_KEY')
-    }
-
     stages {
 
         stage('Checkout') {
@@ -22,11 +17,18 @@ pipeline {
 
         stage('Run Tests on BrowserStack') {
             steps {
-                bat 'mvn clean test -DrunOn=browserstack'
+                // Inject credentials into environment for Windows batch
+                withEnv([
+                    "BROWSERSTACK_USERNAME=${BROWSERSTACK_USERNAME}",
+                    "BROWSERSTACK_ACCESS_KEY=${BROWSERSTACK_ACCESS_KEY}"
+                ]) {
+                    bat 'mvn clean test -DrunOn=browserstack'
+                }
             }
         }
     }
-        post {
+
+    post {
         always {
             echo 'Test execution completed'
         }
